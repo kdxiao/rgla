@@ -43,7 +43,17 @@ impl Mat4 {
 
     // from_rot
     // orthog_project
-    // perspective_project
+    
+    // write version that uses [0,1] depth range, for consistency
+    pub fn orthographic_left(l: f32, r: f32, b: f32, t: f32, n: f32, f: f32) -> Self {
+        Self::from_cols(
+            Vec4::new(2.0 / (r - l), 0.0, 0.0, 0.0),
+            Vec4::new(0.0, 2.0 / (t - b), 0.0, 0.0),
+            Vec4::new(0.0, 0.0, 2.0 / (n - f), 0.0),
+            Vec4::new(-(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1.0),
+        )
+    }
+
 
     pub fn perspective_left(fov: f32, aspect_ratio: f32, near: f32, far: f32) -> Self {
         let w: f32 = 1.0 / f32::tan(fov * 0.5);
