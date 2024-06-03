@@ -44,6 +44,52 @@ impl Mat4 {
     // from_rot
     // orthog_project
     // perspective_project
+
+    pub fn perspective_left(fov: f32, aspect_ratio: f32, near: f32, far: f32) -> Self {
+        let w: f32 = 1.0 / f32::tan(fov * 0.5);
+        let h: f32 = w * aspect_ratio;
+        let r: f32 = far / (far - near);
+        Self::from_cols(
+            Vec4::new(w, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, h, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, r, 1.0),
+            Vec4::new(0.0, 0.0, -r * near, 0.0),
+        )
+    }
+
+    pub fn perspective_right(fov: f32, aspect_ratio: f32, near: f32, far: f32) -> Self {
+        let w: f32 = 1.0 / f32::tan(fov * 0.5);
+        let h: f32 = w * aspect_ratio;
+        let r: f32 = far / (far - near);
+        Self::from_cols(
+            Vec4::new(w, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, h, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, r, -1.0),
+            Vec4::new(0.0, 0.0, r * near, 0.0),
+        )
+    }
+
+    pub fn perspective_inf_left(fov: f32, aspect_ratio: f32, near: f32) -> Self {
+        let w: f32 = 1.0 / f32::tan(fov * 0.5);
+        let h: f32 = w * aspect_ratio;
+        Self::from_cols(
+            Vec4::new(w, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, h, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, 1.0, 1.0),
+            Vec4::new(0.0, 0.0, -near, 0.0),
+        )
+    }
+
+    pub fn perspective_inf_right(fov: f32, aspect_ratio: f32, near: f32) -> Self {
+        let w: f32 = 1.0 / f32::tan(fov * 0.5);
+        let h: f32 = w * aspect_ratio;
+        Self::from_cols(
+            Vec4::new(w, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, h, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, -1.0, -1.0),
+            Vec4::new(0.0, 0.0, -near, 0.0),
+        )
+    }
 }
 
 impl Add<Mat4> for Mat4 {
