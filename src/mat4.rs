@@ -42,18 +42,30 @@ impl Mat4 {
     pub const ZERO: Self = Self::from_cols(Vec4::ZERO, Vec4::ZERO, Vec4::ZERO, Vec4::ZERO);
 
     // from_rot
-    // orthog_project
-    
-    // write version that uses [0,1] depth range, for consistency
-    pub fn orthographic_left(l: f32, r: f32, b: f32, t: f32, n: f32, f: f32) -> Self {
-        Self::from_cols(
-            Vec4::new(2.0 / (r - l), 0.0, 0.0, 0.0),
-            Vec4::new(0.0, 2.0 / (t - b), 0.0, 0.0),
-            Vec4::new(0.0, 0.0, 2.0 / (n - f), 0.0),
-            Vec4::new(-(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1.0),
-        )
-    }
 
+    pub fn orthographic_left(l: f32, r: f32, b: f32, t: f32, n: f32, f: f32) -> Self {
+        let width_inv: f32 = 1.0 / (r - l);
+        let height_inv: f32 = 1.0 / (t - b);
+        let range_inv = 1.0 / (f - n);
+        Self::from_cols(
+            Vec4::new(2.0 * width_inv, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, 2.0 * height_inv, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, range_inv, 0.0),
+            Vec4::new(-(r + l) * width_inv, -(t + b) * height_inv, -range_inv * n, 1.0),
+        )
+    }   
+
+    pub fn orthographic_right(l: f32, r: f32, b: f32, t: f32, n: f32, f: f32) -> Self {
+        let width_inv: f32 = 1.0 / (r - l);
+        let height_inv: f32 = 1.0 / (t - b);
+        let range_inv = 1.0 / (n - f);
+        Self::from_cols(
+            Vec4::new(2.0 * width_inv, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, 2.0 * height_inv, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, range_inv, 0.0),
+            Vec4::new(-(r + l) * width_inv, -(t + b) * height_inv, -range_inv * n, 1.0),
+        )
+    }      
 
     pub fn perspective_left(fov: f32, aspect_ratio: f32, near: f32, far: f32) -> Self {
         let w: f32 = 1.0 / f32::tan(fov * 0.5);
