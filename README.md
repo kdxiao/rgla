@@ -6,8 +6,8 @@ I wrote this linear algebra library to familiarize myself with the graphics pipe
 - [ ] Mat3: 3x3 Matrices
 - [ ] Mat2: 2x2 Matrices
 - [X] Vec4: 4D Vectors
-- [ ] Vec3: 3D Vectors
-- [ ] Vec2: 2D Vectors
+- [X] Vec3: 3D Vectors
+- [X] Vec2: 2D Vectors
 - [ ] Rotors
 - [ ] Transformations
 
