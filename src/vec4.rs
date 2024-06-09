@@ -53,6 +53,15 @@ impl Vec4 {
       + f32::powi(self.l, 2)
     }
 
+    pub fn abs(self) -> Self {
+        Self {
+            i: f32::abs(self.i),
+            j: f32::abs(self.j),
+            k: f32::abs(self.k),
+            l: f32::abs(self.l),
+        }
+    }
+
     pub fn dist(self, other: Vec4) -> f32 {
         (self - other).norm()
     }
@@ -62,7 +71,7 @@ impl Vec4 {
     }
 
     // be careful, divide by zero error!
-    pub fn normalized(self) -> Self {
+    pub fn normalize(self) -> Self {
         Self {
             i: self.i / self.norm(),
             j: self.j / self.norm(),
