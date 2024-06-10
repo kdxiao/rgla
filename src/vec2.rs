@@ -1,6 +1,6 @@
 use core::{f32, ops::*};
 
-const fn vec(i: f32, j: f32, k: f32) -> Vec2 {
+const fn vec2(i: f32, j: f32) -> Vec2 {
     Vec2::new(i, j)
 }
 
