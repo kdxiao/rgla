@@ -16,6 +16,9 @@ pub use self::mat3::*;
 pub mod mat4;
 pub use self::mat4::*;
 
+pub mod rotor;
+pub use self::rotor::*;
+
 use crate::{Vec2, Vec3, Vec4, Mat2, Mat3, Mat4};
 
 fn main() {
