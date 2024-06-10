@@ -1,4 +1,4 @@
-# rg - Rust Graphics
+# rgm - Rust Graphics Maths
 I wrote this linear algebra library to familiarize myself with the graphics pipeline. It's quite unoptimized at the moment. 
 
 ## Features
