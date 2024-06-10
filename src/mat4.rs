@@ -36,6 +36,16 @@ impl Mat4 {
             col4: vec4,
         }
     }
+
+    // Not recommended, this is slow
+    pub const fn from_rows(row1: Vec4, row2: Vec4, row3: Vec4, row4: Vec4,) -> Self {
+        Self {
+            col1: Vec4::new(row1.i, row2.i, row3.i, row4.i),
+            col2: Vec4::new(row1.j, row2.j, row3.j, row4.j),
+            col3: Vec4::new(row1.k, row2.k, row3.k, row4.k),
+            col4: Vec4::new(row1.l, row2.l, row3.l, row4.l),
+        }
+    }
     
     pub const I: Self = Self::from_cols(Vec4::I, Vec4::J, Vec4::K, Vec4::L);
 
