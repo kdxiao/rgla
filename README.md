@@ -9,6 +9,7 @@ I wrote this linear algebra library to familiarize myself with the graphics pipe
 - [X] Vec3: 3D Vectors
 - [X] Vec2: 2D Vectors
 - [ ] Rotors
+- [X] Bivectors
 - [ ] Transformations
 
 ## Novelty

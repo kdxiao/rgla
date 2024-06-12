@@ -16,10 +16,13 @@ pub use self::mat3::*;
 pub mod mat4;
 pub use self::mat4::*;
 
+pub mod bivec;
+pub use self::bivec::*;
+
 pub mod rotor;
 pub use self::rotor::*;
 
-use crate::{Vec2, Vec3, Vec4, Mat2, Mat3, Mat4};
+use crate::{Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Bivec3};
 
 fn main() {
     let a: Vec4 = Vec4::new(1.0, 2.0, 3.0, 4.0);
