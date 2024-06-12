@@ -13,7 +13,7 @@ I wrote this linear algebra library to familiarize myself with the graphics pipe
 - [ ] Transformations
 
 ## Novelty
-The novelty of this library is that it implements [rotors](https://marctenbosch.com/quaternions/) (instead of quaternions) to represent rotation. They do pretty much the same thing, but rotors are much clearer.
+The novelty of this library is that it implements [rotors](https://marctenbosch.com/quaternions/) (instead of quaternions) to represent rotation. They do pretty much the same thing and have almost the same interface, but rotors make much more sense to think about. 
 
 ## Credits
 Heavily inspired by [`glam-rs`](https://github.com/bitshifter/glam-rs). 
