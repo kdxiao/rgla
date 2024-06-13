@@ -54,6 +54,14 @@ impl Vec3 {
         }
     }
 
+    pub fn cross(self, other: Vec3) -> Vec3 {
+        Self {
+            i: self.j * other.k - self.k * other.j,
+            j: self.i * other.k - self.k * other.i,
+            k: self.i * other.j - self.j * other.i,
+        }
+    }
+
     pub fn dist(self, other: Vec3) -> f32 {
         (self - other).norm()
     }

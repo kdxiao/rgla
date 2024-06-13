@@ -1,4 +1,4 @@
-use crate::vec3::Vec3;
+use crate::{Vec2, Vec3, Vec4, Mat2, Mat4, Bivec3};
 use core::{f32, ops::*};
 
 #[derive(Debug, Clone, Copy)]
@@ -9,6 +9,10 @@ pub struct Mat3 {
 }
 
 impl Mat3 {
+    pub const I: Self = Self::from_cols(Vec3::I, Vec3::J, Vec3::K);
+
+    pub const ZERO: Self = Self::from_cols(Vec3::ZERO, Vec3::ZERO, Vec3::ZERO);
+
     const fn new(
         m00: f32, m01: f32, m02: f32,
         m10: f32, m11: f32, m12: f32,
@@ -38,9 +42,21 @@ impl Mat3 {
         }
     }
     
-    pub const I: Self = Self::from_cols(Vec3::I, Vec3::J, Vec3::K);
+    pub const fn from_scale(scale: Vec2) -> Self {
+        Self::from_cols(
+            Vec3::new(scale.i, 0.0, 0.0),
+            Vec3::new(0.0, scale.j, 0.0),
+            Vec3::K,
+        )
+    }
 
-    pub const ZERO: Self = Self::from_cols(Vec3::ZERO, Vec3::ZERO, Vec3::ZERO);
+    pub const fn from_translation(translation: Vec2) -> Self {
+        Self::from_cols(
+            Vec3::I,
+            Vec3::J,
+            Vec3::new(translation.i, translation.j, 0.0)
+        )
+    }
 }
 
 impl Add<Mat3> for Mat3 {
