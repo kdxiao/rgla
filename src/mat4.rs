@@ -1,4 +1,4 @@
-use crate::vec4::Vec4;
+use crate::{Vec2, Vec3, Vec4, Mat2, Mat3, Bivec3};
 use core::{f32, ops::*};
 
 // const fn mat4(col1: Vec4, col2: Vec4, col3: Vec4, col4: Vec4) -> Mat4 {
@@ -45,6 +45,57 @@ impl Mat4 {
             col3: Vec4::new(row1.k, row2.k, row3.k, row4.k),
             col4: Vec4::new(row1.l, row2.l, row3.l, row4.l),
         }
+    }
+
+    pub const fn from_scale(scale: Vec3) -> Self {
+        Self::from_cols(
+            Vec4::new(scale.i, 0.0, 0.0, 0.0),
+            Vec4::new(0.0, scale.j, 0.0, 0.0),
+            Vec4::new(0.0, 0.0, scale.k, 0.0),
+            Vec4::L,
+        )
+    }
+
+    pub const fn from_translation(translation: Vec3) -> Self {
+        Self::from_cols(
+            Vec4::I,
+            Vec4::J,
+            Vec4::K,
+            Vec4::new(translation.i, translation.j, translation.k, 1.0),
+        )
+    }
+
+    pub fn from_rotation_i(angle: f32) -> Self {
+        let sin: f32 = f32::sin(angle);
+        let cos: f32 = f32::cos(angle);
+        Self::from_cols(
+            Vec4::I,
+            Vec4::new(0.0, cos, sin, 0.0),
+            Vec4::new(0.0, -sin, cos, 0.0),
+            Vec4::L,
+        )
+    }
+
+    pub fn from_rotation_j(angle: f32) -> Self {
+        let sin: f32 = f32::sin(angle);
+        let cos: f32 = f32::cos(angle);
+        Self::from_cols(
+            Vec4::new(cos, 0.0, sin, 0.0),
+            Vec4::J,
+            Vec4::new(-sin, 0.0, cos, 0.0),
+            Vec4::L,
+        )
+    }
+
+    pub fn from_rotation_k(angle: f32) -> Self {
+        let sin: f32 = f32::sin(angle);
+        let cos: f32 = f32::cos(angle);
+        Self::from_cols(
+            Vec4::new(cos, sin, 0.0, 0.0),
+            Vec4::new(-sin, cos, 0.0, 0.0),
+            Vec4::K,
+            Vec4::L,
+        )
     }
     
     pub const I: Self = Self::from_cols(Vec4::I, Vec4::J, Vec4::K, Vec4::L);

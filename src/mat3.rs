@@ -54,7 +54,17 @@ impl Mat3 {
         Self::from_cols(
             Vec3::I,
             Vec3::J,
-            Vec3::new(translation.i, translation.j, 0.0)
+            Vec3::new(translation.i, translation.j, 1.0)
+        )
+    }
+
+    pub fn from_rotation(angle: f32) -> Self {
+        let sin: f32 = f32::sin(angle);
+        let cos: f32 = f32::cos(angle);
+        Self::from_cols(
+            Vec3::new(cos, sin, 0.0),
+            Vec3::new(- sin, cos, 0.0),
+            Vec3::K,
         )
     }
 }
