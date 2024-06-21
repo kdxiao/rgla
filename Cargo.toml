@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 description = "A linear algebra library for graphics that implements rotors instead of quaternions."
 license = "BSD-2-Clause"
-keywords = ["graphics", "linear algebra", "matrix", "vector", "rotor"]
+keywords = ["graphics", "linalg", "matrix", "vector", "rotor"]
 categories = ["graphics"]
 
 [dependencies]
